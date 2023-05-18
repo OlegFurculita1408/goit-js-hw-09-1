@@ -1,11 +1,10 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
+require('flatpickr/dist/themes/material_green.css');
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-
 const refs = {timerSpanValue: document.querySelectorAll('.timer span.value'),};
-
-const timeInputPicker = document.querySelector('[datetime-picker]');
+const timeInputPicker = document.querySelector('#datetime-picker');
 const btnStart = document.querySelector('[data-start]');
 const days = document.querySelector('[data-days]');
 const hours = document.querySelector('[data-hours]');
@@ -26,8 +25,10 @@ const seconds = document.querySelector('[data-seconds]');
       if (selectedDates[0] > new Date()) {
         Notify.success('Press START to start the countdown timer');
         btnStart.disabled = false;
-      } else {
-        Notify.failure('Please choose a date in the future').disabled = true;
+      } 
+      else {
+        Notify.failure('Please choose a date in the future');
+        btnStart.disabled = true;
       }
     },
   };
@@ -62,10 +63,6 @@ const seconds = document.querySelector('[data-seconds]');
     } else {
       Notify.success('The countdown is complete! RELOAD the page!');
       clearInterval(intervalId);
-  
-      refs.timerSpanValue.forEach(elm => {
-        elm.style.color = 'black';
-      });
     }
   };
   
