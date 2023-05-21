@@ -2,6 +2,7 @@ import Notiflix from 'notiflix';
 
 
 const form = document.querySelector('.form');
+
   form.addEventListener('submit', onFormSubmit);
 
 function onFormSubmit(event) {
@@ -10,10 +11,17 @@ function onFormSubmit(event) {
 let mainDelay = event.currentTarget.delay.valueAsNumber;
 const delayStep = event.currentTarget.step.valueAsNumber;
 const amountOfPromise = event.currentTarget.amount.valueAsNumber;
-  
+
   for (let position = 1; position <= amountOfPromise; position += 1) {
-    createPromise(position, mainDelay);
-    mainDelay += delayStep;
+    if (mainDelay <= 0 && delayStep <= 0) {
+      Notiflix.Notify.failure('Please enter a valid value!');
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
+    } else {
+      createPromise(position, mainDelay);
+        mainDelay += delayStep;
+    }
   };
 };
 

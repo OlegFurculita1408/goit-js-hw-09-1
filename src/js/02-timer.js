@@ -25,6 +25,7 @@ const seconds = document.querySelector('[data-seconds]');
       if (selectedDates[0] > new Date()) {
         Notify.success('Press START to start the countdown timer');
         btnStart.disabled = false;
+        timeInputPicker.disabled = true;
       } 
       else {
         Notify.failure('Please choose a date in the future');
